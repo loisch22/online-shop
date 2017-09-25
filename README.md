@@ -1,3 +1,178 @@
+# Angular Cheatsheet
+
+### Global Commands - setting up your computer for the first time to work with Angular CLI
+
+Install Angular CLI
+`npm install -g @angular/cli@1.0.0`
+
+Install Typescript
+`npm list -g typescript`
+
+Install Bower
+`npm install bower -g`
+
+### Project setup
+
+Create new Angular App
+`ng new project-name`
+
+In `src/main.ts` add polyfills to imports
+`import './polyfills.ts';`
+
+Initialize Bower in project root
+`bower init`
+
+Add `bower_components` to `.gitignore`
+```
+...
+# dependencies
+/node_modules
+/bower_components
+...
+```
+
+Install Bootstrap dependency in Bower
+`bower install bootstrap --save`
+
+In `.angular-cli.json` add Bootstrap style
+```
+...
+"apps": [
+    {
+      ...
+      ],
+      ...
+      "styles": [
+        "styles.css",
+        "../bower_components/bootstrap/dist/css/bootstrap.css"
+      ],
+...
+```
+Serve app in browser
+`ng serve`
+
+Use Angular build-in linter
+`ng lint`
+
+Create new component
+`ng g component component-name`
+
+Create new pipe
+`ng g pipe pipe-name`
+
+Create new class
+`ng g class class-name.model`
+
+Create `app.routing.ts` file in `app` and add below. Also change `ComponentName` to actual name of component. This sets up your homepage view ie splash page
+```
+import { ComponentName} from './component-name/component-name.component';
+import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: ComponentName
+  }
+];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+
+```
+
+Add routing `import` and new component `import` to `app.module.ts`
+
+```
+...
+import { ComponentName} from './component-name/component-name.component';
+import { routing } from './app.routing';
+...
+```
+
+Add `routing` constant to `app.module.ts`
+
+```
+...
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    routing
+  ],
+...
+```
+
+Add `<router-outlet` to `app.component.html`
+
+```
+<div class="container">
+  <h1>{{title}}</h1>
+  <router-outlet></router-outlet>
+</div>
+```
+
+Change the `title` property in `AppComponent` class in `app.component.ts`
+
+```
+...
+export class AppComponent {
+  title = 'Site Name';
+}
+```
+
+### Creating multiple pages
+
+Add `path` of multiple page to `app.routing.ts`
+```
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AboutComponent }   from './about/about.component';
+
+const appRoutes: Routes = [
+  {
+     path: '',
+     component: WelcomeComponent
+   },
+  {
+    path: 'about',
+    component: AboutComponent
+  }
+ ];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+```
+
+Insert a `routerLink` into `app.component.html`
+```
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="">Epicodus Tunes</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a routerLink="about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>{{title}}</h1>
+  <router-outlet></router-outlet>
+</div>
+```
+
+### Dynamic Routing
+
+
+
+
+
+
+
+
+
+
 # OnlineStore
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
