@@ -60,9 +60,6 @@ Create new component
 Create new pipe
 `ng g pipe pipe-name`
 
-Create new class
-`ng g class class-name.model`
-
 Create `app.routing.ts` file in `app` and add below. Also change `ComponentName` to actual name of component. This sets up your homepage view ie splash page
 ```
 import { ComponentName} from './component-name/component-name.component';
@@ -117,6 +114,19 @@ Change the `title` property in `AppComponent` class in `app.component.ts`
 ...
 export class AppComponent {
   title = 'Site Name';
+}
+```
+
+### Create model
+
+Use `ng g class class-name.model` to create new class 
+
+`ng g class class-name.model`
+
+Create properties in the constructor
+```
+export class ClassName {
+  constructor (public name: string) { }
 }
 ```
 
