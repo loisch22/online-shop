@@ -1,9 +1,9 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Album } from '../album.model';
 import { AlbumService } from '../album.service';
+import { FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-album-detail',
@@ -14,8 +14,8 @@ import { AlbumService } from '../album.service';
 
 
   export class AlbumDetailComponent implements OnInit {
-  albumId: number;
-  albumToDisplay: Album;
+  albumId: string;
+  albumToDisplay;
 
 constructor(
   private route: ActivatedRoute,
@@ -24,7 +24,7 @@ constructor(
 
   ngOnInit() {
       this.route.params.forEach((urlParameters) => {
-       this.albumId = parseInt(urlParameters['id']);
+       this.albumId = urlParameters['id'];
      });
      this.albumToDisplay = this.albumService.getAlbumById(this.albumId);
     }
